@@ -20,9 +20,9 @@ class ProductController extends Controller
         $products = Product::paginate(15);
 
         //return data as a resource
-        //return ProductResource::collection($products);
+        return ProductResource::collection($products);
 
-        return view('test')->with('products',$products);
+        //return view('test')->with('products',$products);
     }
 
     /**
