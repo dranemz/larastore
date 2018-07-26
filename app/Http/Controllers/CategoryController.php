@@ -39,7 +39,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = $request->isMethod('put') ? Category::findOrFail($request->id) : new Category;
+
+        $category->id = $request->input('id');
+        $category->name = $request->input('name');
+
+        if($category->save())
+        {
+            return new CategoryResource($category);
+        }
     }
 
     /**
@@ -50,30 +58,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $category = Category::findOrFail($id);
+        return new CategoryResource($category);
     }
 
     /**
@@ -84,6 +70,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        if($category->delete())
+        {
+            return new CategoryResource($category);
+        }
+        
     }
 }

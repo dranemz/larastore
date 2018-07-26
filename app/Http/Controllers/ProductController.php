@@ -57,8 +57,7 @@ class ProductController extends Controller
         //get a single product
         $product = Product::findOrFail($id);
         //return single product as a resource
-        //return new ProductResource($product);
-        return $product;
+        return new ProductResource($product);
     }
 
 
