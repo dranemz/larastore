@@ -23,7 +23,8 @@ class Product extends JsonResource
             'description'=> $this->description,
             'quantity'=> $this->quantity,
             'price'=> $this->price,
-            'categories'=> $this->category()->name
+            'categories'=> $this->category()->first()->name,
+            'category_id'=> $this->category_id
         ];
     }
 
